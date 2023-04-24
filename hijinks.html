@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <style>
+            body { background-color: black; max-width: max-content;
+margin: auto;}
+            div { color: whitesmoke; font-family: sans-serif; margin: auto; text-align: center;}
+            .title {  font-size: 22pt }
+            .left { float: left; }
+            .right { float: right; }
+            .clear { clear: both; }
+            .svg { display; none; }
+            button {
+            background-color: rgb(112, 112, 112);
+            border-radius: 6px;
+            border: none;
+            color: rgb(245, 245, 245);
+            padding: 10px;
+            text-transform: uppercase;
+            width: 200px;
+            cursor: pointer;
+            margin: auto;
+            }
+            #result {
+            background-color: whitesmoke;
+            color: black;
+            height: 50px;
+            text-align: center;
+            margin: auto;
+            width: 50px;
+            padding: 50px;
+            border: 1px solid gray;
+            border-radius: 10px;  
+            font-size:50px;
+            }
+            .slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+        </style>
+    </head>
+    <body>
+        <div class="svg" display="none">
+            <svg display="none">
+                <symbol id="1" viewBox="0 0 10 10">
+                    <circle cx="5" cy="5" r="5" fill="red"/>
+                </symbol>
+                <symbol id="2" viewBox="0 0 10 10">
+                    <circle cx="5" cy="5" r="5" fill="blue"/>
+                </symbol>
+                <symbol id="3" viewBox="0 0 10 10">
+                    <circle cx="5" cy="5" r="5" fill="green"/>
+                </symbol>
+                <symbol id="4" viewBox="0 0 10 10">
+                    <circle cx="5" cy="5" r="5" fill="yellow"/>
+                </symbol>
+                <symbol id="5" viewBox="0 0 10 10">
+                    <circle cx="5" cy="5" r="5" fill="cyan"/>
+                </symbol>
+                <symbol id="6" viewBox="0 0 10 10">
+                    <circle cx="5" cy="5" r="5" fill="pink"/>
+                </symbol>
+            </svg>
+        </div>
+        <div>
+        <div class="left clear">back</div>
+        <div class="right">settings</div>
+        <div class="title">HIJINKS</div>
+        </div>
+        <p></p>
+        <svg viewBox="0 0 320 320" height="500" width="500" id="board">
+            <rect x="22" y="22" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect x="132" y="22" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect x="242" y="22" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect x="22" y="132" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect y="132" x="132" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect y="132" x="242" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect x="22" y="242" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect y="242" x="132" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+            <rect y="242" x="242" width="56" height="56" style="fill:rgb(255, 255, 255)" rx="5"/>
+
+        </svg>
+        <p id="result">
+  
+        </p>
+        <div>
+        <button id="button">Roll</button></div>
+
+        <div class="slidecontainer">
+            <input type="range" min="50" max="200" value="100" class="slider" id="myRange">
+          </div>
+                  <script>
+        var dice = {
+            sides: 6,
+            roll: function () {
+              var randomNumber = Math.floor(Math.random() * this.sides) + 1;
+              return randomNumber;
+            }
+          }
+          
+          
+          
+          //Prints dice roll to the page
+          
+          function printNumber(number) {
+            var placeholder = document.getElementById('result');
+            placeholder.innerHTML = `<svg height="50" width="50"><use href="#${number}"/></svg>`;
+          }
+          
+          var button = document.getElementById('button');
+          
+          button.onclick = function() {
+            var result = dice.roll();
+            printNumber(result);
+          };
+          
+          </script>
+          <script>
+            var slider = document.getElementById("myRange");
+            
+            slider.oninput = function() {
+                var fsize = slider.value*0.01*500;
+                var size = ~~fsize;
+                document.getElementById("board").setAttribute("height", `${size}px`);
+                document.getElementById("board").setAttribute("width", `${size}px`);
+
+            }
+            </script>
+    </body>
+</html>
